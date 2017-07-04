@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<!-- needed to render correctly on mobile -->
+<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+<!-- IOS: Set your app name -->
+<meta name="apple-mobile-web-app-title" content="AR.js Augmented Webpages" />
+<!-- IOS: Set your app to full screen mode -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+<!-- getmdl.io -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+
+<!-- https://davidshimjs.github.io/qrcodejs/ -->
+<script defer src='https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js'></script>
+
+<link rel='stylesheet' href='css/main.css'>
+<link rel='stylesheet' href='css/markers-overlay.css'>
+
+<script defer src='js/main.js'></script>
+
+<body>
+	<!-- marker page -->
+	<div id="markers-page" style='display: none;'>
+		<div style='position: absolute; bottom: 10px; width:100%; text-align: center;';>
+			Tracking backend:
+			<a href='javascript:void(0)' onclick='setMarkerPageTrackingBackend("artoolkit")'>artoolkit</a> /
+			<a href='javascript:void(0)' onclick='setMarkerPageTrackingBackend("aruco")'>aruco</a>
+			Current : <span id='currentTracking'></span>
+			<br/>
+			<a href='javascript:void(0)' onclick='markerPageLeave()'>hide marker</a>
+		</div>
+		<div class='markers-aruco'>
+			<img class='marker-center marker-image' src='../../../three.js/threex/threex-aruco/examples/images/1001.png'>
+			<img class='marker-topleft marker-image' src='../../../three.js/threex/threex-aruco/examples/images/1002.png'>
+			<img class='marker-topright marker-image' src='../../../three.js/threex/threex-aruco/examples/images/1003.png'>
+			<img class='marker-bottomleft marker-image' src='../../../three.js/threex/threex-aruco/examples/images/1004.png'>
+			<img class='marker-bottomright marker-image' src='../../../three.js/threex/threex-aruco/examples/images/1005.png'>
+		</div>
+		<div class='markers-artoolkit'>
+			<img class='marker-center marker-image' src='../../../three.js/examples/marker-training/examples/pattern-images/pattern-hiro.png'>
+			<img class='marker-topleft marker-image' src='../../../three.js/examples/marker-training/examples/pattern-images/pattern-letterA.png'>
+			<img class='marker-topright marker-image' src='../../../three.js/examples/marker-training/examples/pattern-images/pattern-letterB.png'>
+			<img class='marker-bottomleft marker-image' src='../../../three.js/examples/marker-training/examples/pattern-images/pattern-letterC.png'>
+			<img class='marker-bottomright marker-image' src='../../../three.js/examples/marker-training/examples/pattern-images/pattern-letterF.png'>
+		</div>
+	</div>
+	
+	<!-- Always shows a header, even in smaller screens. -->
+	<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+		<header class="mdl-layout__header">
+			<div class="mdl-layout__header-row" style='justify-content: center; margin: 3em;'>
+				<!-- Title -->
+				<span class="mdl-layout-title" style="font-size: 300%;">Augmented Webpages with <a href='https://github.com/jeromeetienne/ar.js' target='_blank'>AR.js</a>
+					<br/>
+				<span style='font-size: 80%; color: #ccc;'>Adding AR to any Webpage</span></span>
+			</div>
+		</header>
+		<main class="mdl-layout__content">
+			<div class="page-content">
+
+				<!-- INFO BUTTON and DIALOG -->
+				<button id='infoButton' class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect">
+					<i class="material-icons">info</i>
+				</button>
+				<dialog id='infoDialog' class="mdl-dialog">
+					<h4 class="mdl-dialog__title">Augmented WebPages with AR.js</h4>
+					<div class="mdl-dialog__content">
+						<p>
+							Adding AR to any Webpage
+						</p>
+						<iframe width="560" height="315" src="https://www.youtube.com/embed/sp7Wxk1yVcY" frameborder="0" allowfullscreen></iframe>
+					</div>
+					<div class="mdl-dialog__actions">
+						<button type="button" class="mdl-button">Close</button>
+					</div>
+				</dialog>
+
+				<!-- MIDDLE QRCODE CARD -->
+				<div class="mdl-grid">
+					<div class="mdl-cell mdl-cell--4-col"></div>
+					<div class="mdl-cell mdl-cell--4-col">
+						<div id='scanThisQRCode' class="mdl-card mdl-shadow--2dp" style='justify-content: center'>
+							<div class="mdl-card__title">
+								<h2 class="mdl-card__title-text">Scan this QR-Code</h2>
+							</div>
+							<div class="mdl-card__supporting-text">
+								<div id='qrCodeContainer'></div>
+							</div>
+							<div class="mdl-card__actions mdl-card--border">
+								<a onclick='markerPageEnter()' class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"  style='width: 90%'>
+									Done
+								</a>
+								<!-- Colored FAB button with ripple -->
+							</div>
+						</div>
+					</div>
+					<div class="mdl-cell mdl-cell--4-col"></div>
+				</div>
+			</div>
+		</main>
+	</div>
+	
+	<!-- getmdl.io -->
+	<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+	
+	<!-- from https://davidshimjs.github.io/qrcodejs/ -->
+	<script defer src='https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js'></script>
+</body>
